@@ -21,9 +21,15 @@
     <ClCompile Include="bird_control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="wall_control.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bird_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="start.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,11 +1,27 @@
 #include<iostream>
 using namespace std;
 #include<gl/glut.h>
+#include<math.h>
+#include "start.h"
 #include "bird_control.h"
+
+GLfloat bird_x = 100;
+GLfloat bird_y = 250;
 
 void drawBird()
 {
-
+	GLfloat angle, x, y;
+	glColor3f(1, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_POINTS);
+	for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
+	{
+		x = 20.0 * sin(angle) + bird_x;
+		y = 20.0 * cos(angle) + bird_y;
+		glVertex3f(x, y, 0.0);
+	}
+	glEnd();
+	glFlush();
 }
 
 void mainDisplay()
@@ -14,11 +30,30 @@ void mainDisplay()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	drawBird();
+	glFlush();
 }
 
 void mainInit()
 {
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
+	glPointSize(2.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0, 500, 0, 500);
+}
 
+void mouse_control(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		bird_jump();
+	}
+}
+
+void idleFunc()
+{
+	fall();
 }
 
 int main(int argc, char **argv)
@@ -30,5 +65,7 @@ int main(int argc, char **argv)
 	glutCreateWindow("Flappy Bird");
 	glutDisplayFunc(mainDisplay);
 	mainInit();
+	glutMouseFunc(mouse_control);
+	glutIdleFunc(idleFunc);
 	glutMainLoop();
 }
