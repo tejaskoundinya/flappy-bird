@@ -4,6 +4,7 @@ using namespace std;
 #include<math.h>
 #include "start.h"
 #include "bird_control.h"
+#include "wall_control.h"
 
 GLfloat bird_x = 100;
 GLfloat bird_y = 250;
@@ -12,7 +13,7 @@ void drawBird()
 {
 	GLfloat angle, x, y;
 	glColor3f(1, 0, 0);
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_POINTS);
 	for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 	{
@@ -22,6 +23,7 @@ void drawBird()
 	}
 	glEnd();
 	glFlush();
+	//glutSwapBuffers();
 }
 
 void mainDisplay()
@@ -53,13 +55,16 @@ void mouse_control(int button, int state, int x, int y)
 
 void idleFunc()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
 	fall();
+	move_wall();
+	glutSwapBuffers();
 }
 
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(10, 10);
 	glutCreateWindow("Flappy Bird");

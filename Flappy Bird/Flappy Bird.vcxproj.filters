@@ -32,5 +32,8 @@
     <ClInclude Include="start.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="wall_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
