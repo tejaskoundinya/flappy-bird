@@ -9,6 +9,8 @@ using namespace std;
 GLfloat bird_x = 100;
 GLfloat bird_y = 250;
 
+int game_over = 0;
+
 void drawBird()
 {
 	GLfloat angle, x, y;
@@ -32,6 +34,7 @@ void mainDisplay()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	drawBird();
+	generate_walls();
 	glFlush();
 }
 
@@ -55,10 +58,20 @@ void mouse_control(int button, int state, int x, int y)
 
 void idleFunc()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	fall();
-	move_wall();
-	glutSwapBuffers();
+	if (!game_over)
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		fall();
+		generate_walls();
+		display_wall();
+		move_wall();
+		check_collision();
+		glutSwapBuffers();
+	}
+	else
+	{
+		glutSwapBuffers();
+	}
 }
 
 int main(int argc, char **argv)

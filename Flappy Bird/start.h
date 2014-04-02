@@ -4,6 +4,8 @@
 extern GLfloat bird_x;
 extern GLfloat bird_y;
 
+extern int game_over;
+
 extern void drawBird();
 void mainDisplay();
 void mainInit();

@@ -2,6 +2,8 @@
 #include<gl/glut.h>
 #include"start.h"
 
+GLfloat g = 0.0;
+
 void bird_jump()
 {
 	GLfloat cur_x, cur_y, dest_x, dest_y;
@@ -23,6 +25,7 @@ void bird_jump()
 			bird_y++;
 		}
 	}
+	g = 0.0;
 }
 
 void fall()
@@ -31,7 +34,8 @@ void fall()
 		drawBird();
 	else
 	{
-		bird_y -= 0.025;
+		bird_y -= 0.03 + g;
+		g += 0.00001;
 		drawBird();
 	}
 }
