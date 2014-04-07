@@ -67,6 +67,8 @@ void generate_walls()
 
 void display_wall()
 {
+	if (count == 0)
+		return;
 	glColor3f(0.0, 1.0, 0.0);
 
 	for (int i = 0; i < 5; i++)
@@ -86,14 +88,18 @@ void display_wall()
 		glVertex2f(walls[i]->x, 500.0);
 		glEnd();
 		glFlush();
-		/*if (abs((int)bird_x - (int)walls[i]->x) < 20 && abs((int)bird_y - (int)walls[i]->start_y) > 20)
+		if (abs((int)bird_x - (int)walls[i]->x) < 20 || abs((int)bird_x - ((int)walls[i]->x + 50)) < 20)
 		{
-
+			if (bird_y > walls[i]->start_y + 20 && bird_y < walls[i]->start_y + walls[i]->gap_size - 20)
+			{
+				
+			}
+			else
+			{
+				game_over = 1;
+			}
+			
 		}
-		else
-		{
-			game_over = 1;
-		}*/
 	}
 }
 

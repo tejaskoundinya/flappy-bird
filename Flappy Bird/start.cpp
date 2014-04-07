@@ -10,6 +10,7 @@ GLfloat bird_x = 100;
 GLfloat bird_y = 250;
 
 int game_over = 0;
+int score = 0;
 
 void drawBird()
 {
@@ -45,7 +46,7 @@ void mainInit()
 	glPointSize(2.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0, 500, 0, 500);
+	gluOrtho2D(0, 500, 0, 600);
 }
 
 void mouse_control(int button, int state, int x, int y)
@@ -54,6 +55,11 @@ void mouse_control(int button, int state, int x, int y)
 	{
 		bird_jump();
 	}
+}
+
+void keyboard_control(unsigned char key, int x, int y)
+{
+	bird_jump();
 }
 
 void idleFunc()
@@ -70,7 +76,7 @@ void idleFunc()
 	}
 	else
 	{
-		glutSwapBuffers();
+		//glutSwapBuffers();
 	}
 }
 
@@ -78,12 +84,13 @@ int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(500, 600);
 	glutInitWindowPosition(10, 10);
 	glutCreateWindow("Flappy Bird");
 	glutDisplayFunc(mainDisplay);
 	mainInit();
 	glutMouseFunc(mouse_control);
+	glutKeyboardFunc(keyboard_control);
 	glutIdleFunc(idleFunc);
 	glutMainLoop();
 }

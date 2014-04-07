@@ -5,6 +5,7 @@ extern GLfloat bird_x;
 extern GLfloat bird_y;
 
 extern int game_over;
+extern int score;
 
 extern void drawBird();
 void mainDisplay();
