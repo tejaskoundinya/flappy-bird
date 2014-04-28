@@ -35,7 +35,7 @@ void fall()
 	else
 	{
 		bird_y -= 0.03 + g;
-		g += 0.00001;
+		g += 0.00002;
 		drawBird();
 	}
 }

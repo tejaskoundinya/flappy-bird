@@ -92,7 +92,12 @@ void display_wall()
 		{
 			if (bird_y > walls[i]->start_y + 20 && bird_y < walls[i]->start_y + walls[i]->gap_size - 20)
 			{
-				
+				if (((bird_x - walls[i]->x) < 1.0)  && wall_num != walls[i]->id)
+				{
+					wall_num = walls[i]->id;
+					score++;
+					score_lock = 0;
+				}
 			}
 			else
 			{

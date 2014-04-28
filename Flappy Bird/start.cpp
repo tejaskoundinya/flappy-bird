@@ -11,6 +11,8 @@ GLfloat bird_y = 250;
 
 int game_over = 0;
 int score = 0;
+int score_lock = 1;
+int wall_num = -1;
 
 void drawBird()
 {
@@ -62,6 +64,21 @@ void keyboard_control(unsigned char key, int x, int y)
 	bird_jump();
 }
 
+void displayScore()
+{
+	//if (!score_lock)
+	//{
+		//glPushMatrix();
+		//glLoadIdentity();
+		glColor3f(1.0, 0.0, 0.0);
+		glRasterPos2f(400.0, 550.0);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (char)(score + 48));
+		//glPopMatrix();
+		glFlush();
+		score_lock = 1;
+	//}
+}
+
 void idleFunc()
 {
 	if (!game_over)
@@ -72,6 +89,7 @@ void idleFunc()
 		display_wall();
 		move_wall();
 		check_collision();
+		displayScore();
 		glutSwapBuffers();
 	}
 	else

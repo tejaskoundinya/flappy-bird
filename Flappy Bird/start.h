@@ -6,6 +6,8 @@ extern GLfloat bird_y;
 
 extern int game_over;
 extern int score;
+extern int score_lock;
+extern int wall_num;
 
 extern void drawBird();
 void mainDisplay();
