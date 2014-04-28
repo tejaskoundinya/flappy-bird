@@ -1,3 +1,5 @@
+//@author: Tejas Koundinya
+
 #include<iostream>
 using namespace std;
 #include<gl/glut.h>
