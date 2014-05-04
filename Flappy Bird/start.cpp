@@ -78,7 +78,12 @@ void mouse_control(int button, int state, int x, int y)
 		}
 		else if (game_over)
 		{
-			//
+			/*game_over = 0;
+			game_start = 0;
+			count_t = 0;
+			score = 0;
+			bird_x = 100;
+			bird_y = 250;*/
 		}
 		else
 		{
@@ -96,7 +101,12 @@ void keyboard_control(unsigned char key, int x, int y)
 	}
 	else if (game_over)
 	{
-		//
+		/*game_over = 0;
+		game_start = 0;
+		count_t = 0;
+		score = 0;
+		bird_x = 100;
+		bird_y = 250;*/
 	}
 	else
 	{
@@ -234,6 +244,23 @@ void idleFunc()
 	}
 }
 
+void menu(int item)
+{
+	switch (item)
+	{
+	case 1:
+		game_over = 0;
+		game_start = 0;
+		count_t = 0;
+		score = 0;
+		bird_x = 100;
+		bird_y = 250;
+		break;
+	case 2:
+		exit(0);
+	}
+}
+
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
@@ -242,6 +269,10 @@ int main(int argc, char **argv)
 	glutInitWindowPosition(10, 10);
 	glutCreateWindow("Flappy Bird");
 	glutDisplayFunc(mainDisplay);
+	glutCreateMenu(menu);
+	glutAddMenuEntry("Restart Match", 1);
+	glutAddMenuEntry("Exit", 2);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	mainInit();
 	glutMouseFunc(mouse_control);
 	glutKeyboardFunc(keyboard_control);

@@ -13,7 +13,7 @@ struct wall
 	GLfloat x;
 };
 
-int count = 0;
+int count_t = 0;
 struct wall **walls;
 struct wall *wall1;
 struct wall *wall2;
@@ -24,7 +24,7 @@ struct wall *wall5;
 
 void generate_walls()
 {
-	if (count == 0)
+	if (count_t == 0)
 	{
 		walls = (struct wall**) malloc(5 * sizeof(wall));
 		wall1 = (struct wall*) malloc(sizeof(wall));
@@ -62,26 +62,22 @@ void generate_walls()
 		walls[2] = wall3;
 		walls[3] = wall4;
 		walls[4] = wall5;
-		count++;
+		count_t++;
 	}
 }
 
 void display_wall()
 {
-	if (count == 0)
+	if (count_t == 0)
 		return;
 	glColor3f(0.0, 1.0, 0.0);
 
 	for (int i = 0; i < 5; i++)
 	{
 
-		//CLOUDS
-
-		//
-
+		//Start Clouds
 		GLfloat angle, x, y;
 		glColor3f(1, 1, 1);
-		//glClear(GL_COLOR_BUFFER_BIT);
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
@@ -91,7 +87,6 @@ void display_wall()
 		}
 		glEnd();
 
-		//2
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
@@ -110,7 +105,6 @@ void display_wall()
 		}
 		glEnd();
 
-
 		glBegin(GL_POLYGON);
 		glVertex3f(walls[i]->x - 100, walls[i]->start_y + walls[i]->gap_size - 20, -0.5);
 		glVertex3f(walls[i]->x - 150, walls[i]->start_y + walls[i]->gap_size - 20, -0.5);
@@ -119,11 +113,6 @@ void display_wall()
 
 		glEnd();
 
-		//
-
-
-
-		//CLOUDS2
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
@@ -133,7 +122,6 @@ void display_wall()
 		}
 		glEnd();
 
-		//2
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
@@ -164,7 +152,7 @@ void display_wall()
 
 		glColor3f(0, 1, 0);
 
-		//CLOUD2_END
+		//End Clouds
 
 		//glColor3f(0.3, 1.0, 0.247);
 		glColor3f(0.1, 0.5, 0.1);

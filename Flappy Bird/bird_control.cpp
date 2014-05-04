@@ -11,7 +11,7 @@ void bird_jump()
 	cur_y = bird_y;
 	dest_x = cur_x;
 	//dest_y = cur_y + 75; // Original
-	dest_y = cur_y + 115;
+	dest_y = cur_y + 120;
 	while (cur_y <= dest_y)
 	{
 		if (cur_y >= 550)
