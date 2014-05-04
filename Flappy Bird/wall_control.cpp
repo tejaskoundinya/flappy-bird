@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 #include<gl/glut.h>
 #include"wall_control.h"
 #include"start.h"
@@ -29,31 +30,31 @@ void generate_walls()
 		wall1 = (struct wall*) malloc(sizeof(wall));
 		wall1->id = 1;
 		wall1->gap_size = 200;
-		wall1->start_y = 200;
+		wall1->start_y = 250;
 		wall1->x = 500;
 
 		wall2 = (struct wall*) malloc(sizeof(wall));
 		wall2->id = 2;
 		wall2->gap_size = 200;
-		wall2->start_y = 100;
+		wall2->start_y = 150;
 		wall2->x = 800;
 
 		wall3 = (struct wall*) malloc(sizeof(wall));
 		wall3->id = 3;
 		wall3->gap_size = 200;
-		wall3->start_y = 200;
+		wall3->start_y = 250;
 		wall3->x = 1100;
 
 		wall4 = (struct wall*) malloc(sizeof(wall));
 		wall4->id = 4;
 		wall4->gap_size = 200;
-		wall4->start_y = 50;
+		wall4->start_y = 100;
 		wall4->x = 1400;
 
 		wall5 = (struct wall*) malloc(sizeof(wall));
 		wall5->id = 5;
 		wall5->gap_size = 200;
-		wall5->start_y = 250;
+		wall5->start_y = 300;
 		wall5->x = 1700;
 
 		walls[0] = wall1;
@@ -74,6 +75,115 @@ void display_wall()
 	for (int i = 0; i < 5; i++)
 	{
 
+		//CLOUDS
+
+		//
+
+		GLfloat angle, x, y;
+		glColor3f(1, 1, 1);
+		//glClear(GL_COLOR_BUFFER_BIT);
+		glBegin(GL_POLYGON);
+		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
+		{
+			x = 20.0 * sin(angle) + walls[i]->x - 100;
+			y = 20.0 * cos(angle) + walls[i]->start_y + walls[i]->gap_size;
+			glVertex3f(x, y, -0.5);
+		}
+		glEnd();
+
+		//2
+		glBegin(GL_POLYGON);
+		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
+		{
+			x = 20.0 * sin(angle) + walls[i]->x - 150;
+			y = 20.0 * cos(angle) + walls[i]->start_y + walls[i]->gap_size;
+			glVertex3f(x, y, -0.5);
+		}
+		glEnd();
+
+		glBegin(GL_POLYGON);
+		for (angle = 0.0; angle <= (3.0 * GL_PI); angle += GL_PI / 100.0f)
+		{
+			x = 20.0 * sin(angle) + walls[i]->x - 125;
+			y = 20.0 * cos(angle) + walls[i]->start_y + walls[i]->gap_size + 10;
+			glVertex3f(x, y, -0.5);
+		}
+		glEnd();
+
+
+		glBegin(GL_POLYGON);
+		glVertex3f(walls[i]->x - 100, walls[i]->start_y + walls[i]->gap_size - 20, -0.5);
+		glVertex3f(walls[i]->x - 150, walls[i]->start_y + walls[i]->gap_size - 20, -0.5);
+		glVertex3f(walls[i]->x - 150, walls[i]->start_y + walls[i]->gap_size + 10, -0.5);
+		glVertex3f(walls[i]->x - 100, walls[i]->start_y + walls[i]->gap_size + 10, -0.5);
+
+		glEnd();
+
+		//
+
+
+
+		//CLOUDS2
+		glBegin(GL_POLYGON);
+		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
+		{
+			x = 20.0 * sin(angle) + walls[i]->x - 200;
+			y = 20.0 * cos(angle) + walls[i]->start_y - 50;
+			glVertex3f(x, y, -0.5);
+		}
+		glEnd();
+
+		//2
+		glBegin(GL_POLYGON);
+		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
+		{
+			x = 20.0 * sin(angle) + walls[i]->x - 250;
+			y = 20.0 * cos(angle) + walls[i]->start_y - 50;
+			glVertex3f(x, y, -0.5);
+		}
+		glEnd();
+
+		glBegin(GL_POLYGON);
+		for (angle = 0.0; angle <= (3.0 * GL_PI); angle += GL_PI / 100.0f)
+		{
+			x = 20.0 * sin(angle) + walls[i]->x - 225;
+			y = 20.0 * cos(angle) + walls[i]->start_y - 40;
+			glVertex3f(x, y, -0.5);
+		}
+		glEnd();
+
+
+		glBegin(GL_POLYGON);
+		glVertex3f(walls[i]->x - 200, walls[i]->start_y - 70, -0.5);
+		glVertex3f(walls[i]->x - 250, walls[i]->start_y - 70, -0.5);
+		glVertex3f(walls[i]->x - 250, walls[i]->start_y - 40, -0.5);
+		glVertex3f(walls[i]->x - 200, walls[i]->start_y - 40, -0.5);
+
+		glEnd();
+
+
+		glColor3f(0, 1, 0);
+
+		//CLOUD2_END
+
+		//glColor3f(0.3, 1.0, 0.247);
+		glColor3f(0.1, 0.5, 0.1);
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(walls[i]->x, walls[i]->start_y);
+		glVertex2f(walls[i]->x + 50, walls[i]->start_y);
+		glVertex2f(walls[i]->x + 50, 0.0);
+		glVertex2f(walls[i]->x, 0.0);
+		glEnd();
+
+		glBegin(GL_LINE_LOOP);
+		glVertex2f(walls[i]->x, walls[i]->start_y + walls[i]->gap_size);
+		glVertex2f(walls[i]->x + 50, walls[i]->start_y + walls[i]->gap_size);
+		glVertex2f(walls[i]->x + 50, 550.0);
+		glVertex2f(walls[i]->x, 550.0);
+		glEnd();
+
+		glColor3f(0.0, 1.0, 0.0);
+
 		glBegin(GL_POLYGON);
 		glVertex2f(walls[i]->x, walls[i]->start_y);
 		glVertex2f(walls[i]->x + 50, walls[i]->start_y);
@@ -84,8 +194,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		glVertex2f(walls[i]->x, walls[i]->start_y + walls[i]->gap_size);
 		glVertex2f(walls[i]->x + 50, walls[i]->start_y + walls[i]->gap_size);
-		glVertex2f(walls[i]->x + 50, 500.0);
-		glVertex2f(walls[i]->x, 500.0);
+		glVertex2f(walls[i]->x + 50, 550.0);
+		glVertex2f(walls[i]->x, 550.0);
 		glEnd();
 		glFlush();
 		if (abs((int)bird_x - (int)walls[i]->x) < 20 || abs((int)bird_x - ((int)walls[i]->x + 50)) < 20)
@@ -96,7 +206,6 @@ void display_wall()
 				{
 					wall_num = walls[i]->id;
 					score++;
-					score_lock = 0;
 				}
 			}
 			else
@@ -115,16 +224,11 @@ void move_wall()
 		if (walls[i]->x + 50.0 > 0)
 		{
 			//walls[i]->x -= 0.025; // Original
-			walls[i]->x -= 0.110;
+			walls[i]->x -= 0.3;
 		}
 		else
 		{
 			walls[i]->x += 1500;
 		}
 	}
-}
-
-void check_collision()
-{
-
 }

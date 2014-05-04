@@ -14,7 +14,7 @@ void bird_jump()
 	dest_y = cur_y + 115;
 	while (cur_y <= dest_y)
 	{
-		if (cur_y >= 450)
+		if (cur_y >= 550)
 		{
 			drawBird();
 			break;
@@ -35,15 +35,18 @@ void bird_jump()
 
 void fall()
 {
-	if (bird_y <= 50)
+	if (bird_y <= 70)
+	{
 		drawBird();
+		game_over = 1;
+	}
 	else
 	{
 		//bird_y -= 0.03 + g; //Original
 		//g += 0.00002; //Original
-		bird_y -= 0.0515 + g;
+		bird_y -= 0.35 + g;
 		//g += 0.00002;
-		g += 0.00004;
+		g += 0.0002;
 		drawBird();
 	}
 }
