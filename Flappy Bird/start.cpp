@@ -21,7 +21,8 @@ void drawBird()
 	GLfloat angle, x, y;
 	glColor3f(1, 0, 0);
 	//glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_POINTS);
+	//glBegin(GL_POINTS);
+	glBegin(GL_POLYGON);
 	for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 	{
 		x = 20.0 * sin(angle) + bird_x;
@@ -72,9 +73,12 @@ void displayScore()
 	//{
 		//glPushMatrix();
 		//glLoadIdentity();
+	int score_tens = score / 10;
+	int score_units = score % 10;
 		glColor3f(1.0, 0.0, 0.0);
 		glRasterPos2f(400.0, 550.0);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (char)(score + 48));
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (char)((score / 10) + 48));
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (char)((score % 10) + 48));
 		//glPopMatrix();
 		glFlush();
 		score_lock = 1;

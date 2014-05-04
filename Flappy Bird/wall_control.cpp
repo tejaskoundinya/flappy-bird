@@ -114,7 +114,8 @@ void move_wall()
 	{
 		if (walls[i]->x + 50.0 > 0)
 		{
-			walls[i]->x -= 0.025;
+			//walls[i]->x -= 0.025; // Original
+			walls[i]->x -= 0.110;
 		}
 		else
 		{
