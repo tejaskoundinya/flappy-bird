@@ -81,8 +81,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
-			x = 20.0 * sin(angle) + walls[i]->x - 100;
-			y = 20.0 * cos(angle) + walls[i]->start_y + walls[i]->gap_size;
+			x = 20.0 * cos(angle) + walls[i]->x - 100;
+			y = 20.0 * sin(angle) + walls[i]->start_y + walls[i]->gap_size;
 			glVertex3f(x, y, -0.5);
 		}
 		glEnd();
@@ -90,8 +90,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
-			x = 20.0 * sin(angle) + walls[i]->x - 150;
-			y = 20.0 * cos(angle) + walls[i]->start_y + walls[i]->gap_size;
+			x = 20.0 * cos(angle) + walls[i]->x - 150;
+			y = 20.0 * sin(angle) + walls[i]->start_y + walls[i]->gap_size;
 			glVertex3f(x, y, -0.5);
 		}
 		glEnd();
@@ -99,8 +99,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (3.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
-			x = 20.0 * sin(angle) + walls[i]->x - 125;
-			y = 20.0 * cos(angle) + walls[i]->start_y + walls[i]->gap_size + 10;
+			x = 20.0 * cos(angle) + walls[i]->x - 125;
+			y = 20.0 * sin(angle) + walls[i]->start_y + walls[i]->gap_size + 10;
 			glVertex3f(x, y, -0.5);
 		}
 		glEnd();
@@ -116,8 +116,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
-			x = 20.0 * sin(angle) + walls[i]->x - 200;
-			y = 20.0 * cos(angle) + walls[i]->start_y - 50;
+			x = 20.0 * cos(angle) + walls[i]->x - 200;
+			y = 20.0 * sin(angle) + walls[i]->start_y - 50;
 			glVertex3f(x, y, -0.5);
 		}
 		glEnd();
@@ -125,8 +125,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
-			x = 20.0 * sin(angle) + walls[i]->x - 250;
-			y = 20.0 * cos(angle) + walls[i]->start_y - 50;
+			x = 20.0 * cos(angle) + walls[i]->x - 250;
+			y = 20.0 * sin(angle) + walls[i]->start_y - 50;
 			glVertex3f(x, y, -0.5);
 		}
 		glEnd();
@@ -134,8 +134,8 @@ void display_wall()
 		glBegin(GL_POLYGON);
 		for (angle = 0.0; angle <= (3.0 * GL_PI); angle += GL_PI / 100.0f)
 		{
-			x = 20.0 * sin(angle) + walls[i]->x - 225;
-			y = 20.0 * cos(angle) + walls[i]->start_y - 40;
+			x = 20.0 * cos(angle) + walls[i]->x - 225;
+			y = 20.0 * sin(angle) + walls[i]->start_y - 40;
 			glVertex3f(x, y, -0.5);
 		}
 		glEnd();
@@ -194,6 +194,7 @@ void display_wall()
 				{
 					wall_num = walls[i]->id;
 					score++;
+					printf("%d", score);
 				}
 			}
 			else

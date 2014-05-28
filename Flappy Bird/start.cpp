@@ -14,7 +14,8 @@ GLfloat bird_y = 250;
 int game_over = 0;
 int game_start = 0;
 int score = 0;
-int wall_num = -1;
+int wall_num = 0;
+int intro = 1;
 
 void drawBird()
 {
@@ -25,8 +26,8 @@ void drawBird()
 	glBegin(GL_POLYGON);
 	for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 	{
-		x = 20.0 * sin(angle) + bird_x;
-		y = 20.0 * cos(angle) + bird_y;
+		x = 20.0 * cos(angle) + bird_x;
+		y = 20.0 * sin(angle) + bird_y;
 		glVertex3f(x, y, 0.0);
 	}
 	glEnd();
@@ -35,8 +36,8 @@ void drawBird()
 	glBegin(GL_POINTS);
 	for (angle = 0.0; angle <= (2.0 * GL_PI); angle += GL_PI / 100.0f)
 	{
-		x = 20.0 * sin(angle) + bird_x;
-		y = 20.0 * cos(angle) + bird_y;
+		x = 20.0 * cos(angle) + bird_x;
+		y = 20.0 * sin(angle) + bird_y;
 		glVertex3f(x, y, 0.0);
 	}
 	glEnd();
@@ -71,6 +72,11 @@ void mouse_control(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
+		if (intro == 1)
+		{
+			intro = 0;
+			return;
+		}
 		if (!game_over && !game_start)
 		{
 			bird_jump();
@@ -94,6 +100,11 @@ void mouse_control(int button, int state, int x, int y)
 
 void keyboard_control(unsigned char key, int x, int y)
 {
+	if (intro == 1)
+	{
+		intro = 0;
+		return;
+	}
 	if (!game_over && !game_start)
 	{
 		bird_jump();
@@ -208,8 +219,40 @@ void displayFinalScore()
 	glFlush();
 }
 
+void bitmap_output(int x, int y, char *string)
+{
+	int len, i;
+	glRasterPos2f(x, y);
+	len = (int)strlen(string);
+	for (i = 0; i < len; i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, string[i]);
+	}
+}
+
+void displayIntro()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor3f(0.0, 1.0, 0.0);
+	bitmap_output(125, 500, "Computer Graphics Project");
+	bitmap_output(200, 450, "10CSL67");
+	bitmap_output(175, 350, "FLAPPY BIRD");
+	glColor3f(1.0, 0.0, 0.0);
+	bitmap_output(185, 250, "Submitted by");
+	bitmap_output(165, 215, "Tejas Koundinya");
+	bitmap_output(180, 190, "1KS11CS097");
+	glColor3f(0.0, 1.0, 1.0);
+	bitmap_output(150, 100, "Press any key to start");
+}
+
 void idleFunc()
 {
+	if (intro == 1)
+	{
+		displayIntro();
+		glutSwapBuffers();
+		return;
+	}
 	if (!game_over && game_start)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -254,12 +297,21 @@ void menu(int item)
 		game_start = 0;
 		count_t = 0;
 		score = 0;
+		wall_num = 0;
 		bird_x = 100;
 		bird_y = 250;
 		break;
 	case 2:
 		exit(0);
 	}
+}
+
+void createMenu()
+{
+	glutCreateMenu(menu);
+	glutAddMenuEntry("Restart Match", 1);
+	glutAddMenuEntry("Exit", 2);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 int main(int argc, char **argv)
@@ -270,11 +322,8 @@ int main(int argc, char **argv)
 	glutInitWindowPosition(10, 10);
 	glutCreateWindow("Flappy Bird");
 	glutDisplayFunc(mainDisplay);
-	glutCreateMenu(menu);
-	glutAddMenuEntry("Restart Match", 1);
-	glutAddMenuEntry("Exit", 2);
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	mainInit();
+	createMenu();
 	glutMouseFunc(mouse_control);
 	glutKeyboardFunc(keyboard_control);
 	glutIdleFunc(idleFunc);
